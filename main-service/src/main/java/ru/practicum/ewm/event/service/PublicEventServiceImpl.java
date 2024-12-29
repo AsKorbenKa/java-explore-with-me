@@ -118,7 +118,7 @@ public class PublicEventServiceImpl implements PublicEventService {
         if (!event.getState().equals(EventStates.PUBLISHED)) {
             throw new NotFoundException(String.format("Событие с id=%d не найдено.", eventId));
         }
-        statistic.saveStatistic(request);
+
         Map<Long, Long> hits = statistic.getStatistic(
                 event.getPublishedOn(),
                 LocalDateTime.now(),
@@ -126,10 +126,10 @@ public class PublicEventServiceImpl implements PublicEventService {
                 Boolean.TRUE
         );
 
-        System.out.println(hits);
+        statistic.saveStatistic(request);
         event.setConfirmedRequests((long) requestRepository.findAllByEventAndStatus(eventId,
                 RequestStatuses.CONFIRMED).size());
-        event.setViews(hits.getOrDefault(eventId, 0L));
+        event.setViews(hits.getOrDefault(eventId, 1L));
 
         return EventMapper.mapEventToEventFullDto(event);
     }

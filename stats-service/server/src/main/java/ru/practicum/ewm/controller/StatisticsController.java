@@ -1,6 +1,5 @@
 package ru.practicum.ewm.controller;
 
-import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,7 +22,7 @@ public class StatisticsController {
 
     @PostMapping("/hit")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void createStats(@Valid @RequestBody EndpointHit endpointHit) {
+    public void createStats(@RequestBody EndpointHit endpointHit) {
         service.createStats(endpointHit);
     }
 

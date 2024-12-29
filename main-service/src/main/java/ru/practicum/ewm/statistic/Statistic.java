@@ -13,6 +13,7 @@ import ru.practicum.ewm.ViewStatsDto;
 import ru.practicum.ewm.event.model.Event;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -80,11 +81,12 @@ public class Statistic {
     }
 
     public void saveStatistic(HttpServletRequest request) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         EndpointHit dto = new EndpointHit(
                 serviceName,
                 request.getRequestURI(),
                 request.getRemoteAddr(),
-                LocalDateTime.now().toString()
+                LocalDateTime.now().format(format)
         );
 
         statsClient.createStat(dto);
