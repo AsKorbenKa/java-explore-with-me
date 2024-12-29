@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.practicum.ewm.EndpointHit;
 import ru.practicum.ewm.ViewStats;
+import ru.practicum.ewm.ViewStatsDto;
 import ru.practicum.ewm.mapper.StatisticsMapper;
 import ru.practicum.ewm.model.EndpointHitModel;
 import ru.practicum.ewm.repository.StatisticsRepository;
@@ -35,7 +36,7 @@ class StatisticsServiceImplTest {
             "ewm-main-service",
             "/events/1",
             "192.163.0.1",
-            "2022-09-06 11:00:23"
+            LocalDateTime.now().toString()
     );
 
     private final ViewStats viewStats = new ViewStats() {
@@ -55,6 +56,12 @@ class StatisticsServiceImplTest {
         }
     };
 
+    private final ViewStatsDto viewStatsDto = new ViewStatsDto(
+            "ewm-main-service",
+            "/events/1",
+            5L
+    );
+
     @Test
     void createStats() {
         EndpointHitModel endpointHitModel = StatisticsMapper.mapHitToHitModel(endpointHit);
@@ -69,9 +76,9 @@ class StatisticsServiceImplTest {
         when(repository.findAllByUriAndTimestampAfterAndTimestampBefore(List.of(endpointHit.getUri()), start, end))
                 .thenReturn(List.of(viewStats));
 
-        List<ViewStats> result = statisticsService.getStats(start, end, List.of("/events/1"), false);
+        List<ViewStatsDto> result = statisticsService.getStats(start, end, List.of("/events/1"), false);
 
-        assertEquals(result, List.of(viewStats));
+        assertEquals(result, List.of(viewStatsDto));
     }
 
     @Test
@@ -79,9 +86,9 @@ class StatisticsServiceImplTest {
         when(repository.findDistinctIpByUriAndTimestampAfterAndTimestampBefore(List.of(endpointHit.getUri()), start, end))
                 .thenReturn(List.of(viewStats));
 
-        List<ViewStats> result = statisticsService.getStats(start, end, List.of("/events/1"), true);
+        List<ViewStatsDto> result = statisticsService.getStats(start, end, List.of("/events/1"), true);
 
-        assertEquals(result, List.of(viewStats));
+        assertEquals(result, List.of(viewStatsDto));
     }
 
     @Test
@@ -89,9 +96,9 @@ class StatisticsServiceImplTest {
         when(repository.findAllByTimestampAfterAndTimestampBefore(start, end))
                 .thenReturn(List.of(viewStats));
 
-        List<ViewStats> result = statisticsService.getStats(start, end, new ArrayList<>(), false);
+        List<ViewStatsDto> result = statisticsService.getStats(start, end, new ArrayList<>(), false);
 
-        assertEquals(result, List.of(viewStats));
+        assertEquals(result, List.of(viewStatsDto));
     }
 
     @Test
@@ -99,8 +106,8 @@ class StatisticsServiceImplTest {
         when(repository.findDistinctIpByTimestampAfterAndTimestampBefore(start, end))
                 .thenReturn(List.of(viewStats));
 
-        List<ViewStats> result = statisticsService.getStats(start, end, new ArrayList<>(), true);
+        List<ViewStatsDto> result = statisticsService.getStats(start, end, new ArrayList<>(), true);
 
-        assertEquals(result, List.of(viewStats));
+        assertEquals(result, List.of(viewStatsDto));
     }
 }
