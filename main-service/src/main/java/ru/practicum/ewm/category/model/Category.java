@@ -6,7 +6,6 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "categories")
-@EqualsAndHashCode(of = {"id"})
 @Getter
 @Setter
 @ToString

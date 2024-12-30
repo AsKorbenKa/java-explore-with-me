@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "compilations")
-@EqualsAndHashCode(of = {"id"})
 @Getter
 @Setter
 @ToString

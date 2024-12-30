@@ -6,7 +6,6 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode(of = {"id"})
 @Getter
 @Setter
 @ToString
