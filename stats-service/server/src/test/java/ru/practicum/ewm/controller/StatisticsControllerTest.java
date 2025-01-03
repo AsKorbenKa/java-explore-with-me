@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.practicum.ewm.EndpointHit;
 import ru.practicum.ewm.ViewStats;
+import ru.practicum.ewm.ViewStatsDto;
 import ru.practicum.ewm.service.StatisticsService;
 
 import java.nio.charset.StandardCharsets;
@@ -60,6 +61,12 @@ class StatisticsControllerTest {
         }
     };
 
+    private final ViewStatsDto viewStatsDto = new ViewStatsDto(
+            "ewm-main-service",
+            "/events/1",
+            5L
+    );
+
     @Test
     @SneakyThrows
     void createStats() {
@@ -75,7 +82,7 @@ class StatisticsControllerTest {
     @SneakyThrows
     void getStats() {
         when(service.getStats(any(LocalDateTime.class), any(LocalDateTime.class), any(), any(boolean.class)))
-                .thenReturn(List.of(viewStats));
+                .thenReturn(List.of(viewStatsDto));
 
         String result = mvc.perform(get("/stats")
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -89,7 +96,7 @@ class StatisticsControllerTest {
                 .getResponse()
                 .getContentAsString();
 
-        assertEquals(result, mapper.writeValueAsString(List.of(viewStats)));
+        assertEquals(result, mapper.writeValueAsString(List.of(viewStatsDto)));
     }
 
     @Test
