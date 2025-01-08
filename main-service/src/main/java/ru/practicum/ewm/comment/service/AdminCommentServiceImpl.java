@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.comment.dto.CommentDto;
 import ru.practicum.ewm.comment.dto.UpdateCommentAdminRequest;
 import ru.practicum.ewm.comment.enums.CommentStatuses;
@@ -29,6 +30,7 @@ public class AdminCommentServiceImpl implements AdminCommentService {
     CommentRepository repository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<CommentDto> getAllCommentsByCriteria(List<Long> users, List<Long> events, List<String> statuses,
                                                      LocalDateTime rangeStart, LocalDateTime rangeEnd, Integer from,
                                                      Integer size) {
@@ -72,6 +74,7 @@ public class AdminCommentServiceImpl implements AdminCommentService {
     }
 
     @Override
+    @Transactional
     public CommentDto updateCommentByAdmin(Long commentId, UpdateCommentAdminRequest request) {
         log.info("Обновляем комментарий по запросу администратора.");
 

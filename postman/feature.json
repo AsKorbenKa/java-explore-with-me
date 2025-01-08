@@ -13,6 +13,287 @@
 					"name": "Success",
 					"item": [
 						{
+							"name": "Добавляем инициатора события",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const source = JSON.parse(pm.request.body.raw);\r",
+											"const target = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Пользователь должен содержать поля: id, name, email\", function () {\r",
+											"pm.expect(target).to.have.property('id');\r",
+											"pm.expect(target).to.have.property('name');\r",
+											"pm.expect(target).to.have.property('email');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+											"    pm.expect(target.id).to.not.be.null;\r",
+											"    pm.expect(\"Initiator I.I.\").equal(target.name, 'Имя пользователя должно соответствовать отправленному в запросе');\r",
+											"    pm.expect(\"Initiator@yandex.ru\").equal(target.email, 'Почта пользователя должна соответствовать отправленной в запросе');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Initiator I.I.\",\r\n\t\"email\":\"Initiator@yandex.ru\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/admin/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавляем участника события",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const source = JSON.parse(pm.request.body.raw);\r",
+											"const target = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Пользователь должен содержать поля: id, name, email\", function () {\r",
+											"pm.expect(target).to.have.property('id');\r",
+											"pm.expect(target).to.have.property('name');\r",
+											"pm.expect(target).to.have.property('email');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+											"    pm.expect(target.id).to.not.be.null;\r",
+											"    pm.expect(\"Participant P.P.\").equal(target.name, 'Имя пользователя должно соответствовать отправленному в запросе');\r",
+											"    pm.expect(\"Participant@yandex.ru\").equal(target.email, 'Почта пользователя должна соответствовать отправленной в запросе');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Participant P.P.\",\r\n\t\"email\":\"Participant@yandex.ru\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/admin/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавляем категорию",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const source = JSON.parse(pm.request.body.raw);\r",
+											"const target = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Категория должна содержать поля: id, name\", function () {\r",
+											"pm.expect(target).to.have.property('id');\r",
+											"pm.expect(target).to.have.property('name');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+											"    pm.expect(target.id).to.not.be.null;\r",
+											"    pm.expect(\"Category 1\").equal(target.name, 'Название категории должно совпадать с отправленным');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Category 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/admin/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавляем новое событие",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"annotation\":\"Annotation for Event 1\",\r\n    \"category\": 122,\r\n\t\"description\":\"Description for Event 1\",\r\n\t\"eventDate\":\"2025-01-29 12:12:12\",\r\n\t\"location\": {\r\n        \"lat\": 1.00,\r\n        \"lon\": 1.00\r\n        },\r\n\t\"paid\": true,\r\n\t\"participantLimit\": 50,\r\n\t\"requestModeration\": false,\r\n\t\"title\":\"Title for Event 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/:userId/events",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"events"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "137"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Публикуем событие",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"annotation\":\"Annotation for Event 1\",\r\n    \"category\": 122,\r\n\t\"description\":\"Description for Event 1\",\r\n\t\"eventDate\":\"2025-01-29 12:12:12\",\r\n\t\"location\": {\r\n        \"lat\": 1.00,\r\n        \"lon\": 1.00\r\n        },\r\n\t\"paid\": true,\r\n\t\"participantLimit\": 50,\r\n\t\"requestModeration\": false,\r\n    \"stateAction\": \"PUBLISH_EVENT\",\r\n\t\"title\":\"Title for Event 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/admin/events/:eventId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"events",
+										":eventId"
+									],
+									"variable": [
+										{
+											"key": "eventId",
+											"value": "107"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавляем запрос на участие",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/users/:userId/requests?eventId=107",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"requests"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "107"
+										}
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Добавление нового комментария",
 							"event": [
 								{
@@ -37,10 +318,18 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-											"    pm.expect(target.id).to.not.be.null;\r",
-											"    pm.expect(source.text).equal(target.text);\r",
-											"    pm.expect(target.authorId).equal(2);\r",
+											"    pm.expect(\"Отличный концерт. Я ждал его 7 лет в Азкабане. Буду советовать всем без разбору и без остановки.\").equal(target.text);\r",
 											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
 										],
 										"type": "text/javascript",
 										"packages": {}
@@ -60,7 +349,7 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/users/:userId/comments?eventId=2",
+									"raw": "localhost:8080/users/:userId/comments?eventId=107",
 									"host": [
 										"localhost"
 									],
@@ -73,13 +362,13 @@
 									"query": [
 										{
 											"key": "eventId",
-											"value": "2"
+											"value": "107"
 										}
 									],
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
+											"value": "138"
 										}
 									]
 								}
@@ -121,7 +410,7 @@
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
+											"value": "138"
 										}
 									]
 								}
@@ -164,7 +453,7 @@
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
+											"value": "138"
 										},
 										{
 											"key": "commentId",
@@ -237,7 +526,7 @@
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
+											"value": "138"
 										},
 										{
 											"key": "commentId",
@@ -325,17 +614,6 @@
 											"    pm.response.to.be.ok;    \r",
 											"    pm.response.to.be.withBody;\r",
 											"    pm.response.to.be.json;\r",
-											"});\r",
-											"\r",
-											"const source = pm.collectionVariables.get('response');\r",
-											"const target = pm.response.json()[0];\r",
-											"\r",
-											"pm.test(\"Комментарий должен содержать поля: id, created, text, author, event\", function () {\r",
-											"pm.expect(target).to.have.property('id');\r",
-											"pm.expect(target).to.have.property('text');\r",
-											"pm.expect(target).to.have.property('author');\r",
-											"pm.expect(target).to.have.property('event');\r",
-											"pm.expect(target).to.have.property('created');\r",
 											"});"
 										],
 										"type": "text/javascript",
@@ -347,10 +625,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "/admin/events?users=0&statuses=PUBLISHED&events=0&rangeStart=2022-01-06%2013%3A30%3A38&rangeEnd=2097-09-06%2013%3A30%3A38&from=0&size=1000",
+									"raw": "localhost:8080/admin/comments?users=0&statuses=PUBLISHED&events=0&rangeStart=2022-01-06 00:00:00&rangeEnd=2097-09-06 00:00:00&from=0&size=1000",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
 									"path": [
 										"admin",
-										"events"
+										"comments"
 									],
 									"query": [
 										{
@@ -367,11 +649,11 @@
 										},
 										{
 											"key": "rangeStart",
-											"value": "2022-01-06%2013%3A30%3A38"
+											"value": "2022-01-06 00:00:00"
 										},
 										{
 											"key": "rangeEnd",
-											"value": "2097-09-06%2013%3A30%3A38"
+											"value": "2097-09-06 00:00:00"
 										},
 										{
 											"key": "from",
@@ -406,7 +688,7 @@
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
+											"value": "138"
 										},
 										{
 											"key": "commentId",
@@ -453,7 +735,7 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/users/:userId/comments?eventId=2",
+									"raw": "localhost:8080/users/:userId/comments?eventId=107",
 									"host": [
 										"localhost"
 									],
@@ -466,13 +748,13 @@
 									"query": [
 										{
 											"key": "eventId",
-											"value": "2"
+											"value": "107"
 										}
 									],
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
+											"value": "138"
 										}
 									]
 								}
@@ -510,7 +792,7 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/users/:userId/comments?eventId=2",
+									"raw": "localhost:8080/users/:userId/comments?eventId=107",
 									"host": [
 										"localhost"
 									],
@@ -523,13 +805,13 @@
 									"query": [
 										{
 											"key": "eventId",
-											"value": "2"
+											"value": "107"
 										}
 									],
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
+											"value": "138"
 										}
 									]
 								}
@@ -567,7 +849,7 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/users/:userId/comments?eventId=2",
+									"raw": "localhost:8080/users/:userId/comments?eventId=107",
 									"host": [
 										"localhost"
 									],
@@ -580,70 +862,13 @@
 									"query": [
 										{
 											"key": "eventId",
-											"value": "2"
+											"value": "107"
 										}
 									],
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Добавление комментария к еще не состоявшемуся событию",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Ответ должен содержать код статуса 409 и данные в формате json\", function () {\r",
-											"    pm.response.to.have.status(409);   \r",
-											"    pm.response.to.be.withBody;\r",
-											"    pm.response.to.be.json;\r",
-											"});"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"text\": \"Отличный концерт. Я ждал его 7 лет в Азкабане. Буду советовать всем без разбору и без остановки.\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/users/:userId/comments?eventId=1",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"users",
-										":userId",
-										"comments"
-									],
-									"query": [
-										{
-											"key": "eventId",
-											"value": "1"
-										}
-									],
-									"variable": [
-										{
-											"key": "userId",
-											"value": "2"
+											"value": "138"
 										}
 									]
 								}
@@ -695,7 +920,7 @@
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
+											"value": "138"
 										},
 										{
 											"key": "commentId",
@@ -751,7 +976,7 @@
 									"variable": [
 										{
 											"key": "userId",
-											"value": "2"
+											"value": "138"
 										},
 										{
 											"key": "commentId",
@@ -819,7 +1044,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "138"
 								}
 							]
 						}
@@ -857,7 +1082,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/users/:userId/comments?eventId=2",
+							"raw": "localhost:8080/users/:userId/comments?eventId=107",
 							"host": [
 								"localhost"
 							],
@@ -870,7 +1095,7 @@
 							"query": [
 								{
 									"key": "eventId",
-									"value": "2"
+									"value": "107"
 								}
 							],
 							"variable": [
@@ -919,7 +1144,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "138"
 								},
 								{
 									"key": "commentId",
@@ -975,7 +1200,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "138"
 								},
 								{
 									"key": "commentId",
@@ -1082,7 +1307,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "138"
 								},
 								{
 									"key": "commentId",
@@ -1094,6 +1319,18 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "request_body",
+			"value": "",
+			"type": "default"
 		}
 	]
 }

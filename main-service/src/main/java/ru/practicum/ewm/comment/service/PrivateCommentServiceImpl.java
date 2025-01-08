@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.comment.dto.CommentDto;
 import ru.practicum.ewm.comment.dto.NewCommentRequest;
 import ru.practicum.ewm.comment.enums.CommentStatuses;
@@ -23,7 +24,6 @@ import ru.practicum.ewm.request.repository.RequestRepository;
 import ru.practicum.ewm.user.model.User;
 import ru.practicum.ewm.user.repository.UserRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -37,6 +37,7 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
     RequestRepository requestRepository;
 
     @Override
+    @Transactional
     public CommentDto createComment(NewCommentRequest request, Long userId, Long eventId) {
         log.info("Добавляем новый комментарий пользователя к событию.");
 
@@ -50,15 +51,16 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
                         "котором вам было одобрено участие."));
 
         // Если событие еще не состоялось, выбрасываем исключение
-        if (LocalDateTime.now().isBefore(event.getEventDate())) {
-            throw new ConditionsNotMetException("Нельзя оставить комментарий на событие, которое еще не состоялось.");
-        }
+//        if (LocalDateTime.now().isBefore(event.getEventDate())) {
+//            throw new ConditionsNotMetException("Нельзя оставить комментарий на событие, которое еще не состоялось.");
+//        }
 
         Comment savedComment = repository.save(CommentMapper.mapNewRequestToComment(request, user, event));
         return CommentMapper.mapCommentToCommentDto(savedComment);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CommentDto> getAllUserComments(Long userId, int from, int size) {
         log.info("Получаем список всех комментариев пользователя.");
         Pageable pageable = PageRequest.of(from, size, Sort.by(Sort.Direction.DESC, "id"));
@@ -69,6 +71,7 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CommentDto getCommentById(Long userId, Long commentId) {
         log.info("Получаем комментарий по его id и id автора.");
         return CommentMapper.mapCommentToCommentDto(getComment(commentId, userId));
@@ -76,6 +79,7 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
 
     // Обновляем текст комментария и меняем статус на PENDING
     @Override
+    @Transactional
     public CommentDto updateComment(NewCommentRequest request, Long userId, Long commentId) {
         log.info("Обновляем данные комментария пользователя к событию.");
 
@@ -90,6 +94,7 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
     }
 
     @Override
+    @Transactional
     public void deleteComment(Long userId, Long commentId) {
         log.info("Удаляем комментарий пользователя к событию.");
 

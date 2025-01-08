@@ -248,6 +248,6 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     private Category getCategory(long categoryId) {
         log.info("Получаем категорию по её id.");
         return categoryRepository.findById(categoryId).orElseThrow(() ->
-                new NotFoundException(String.format("Пользователь с id=%d не найден.", categoryId)));
+                new NotFoundException(String.format("Категория с id=%d не найдена.", categoryId)));
     }
 }
