@@ -491,7 +491,7 @@
 											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
 											"    pm.expect(target.id).to.not.be.null;\r",
 											"    pm.expect(source.text).equal(target.text);\r",
-											"    pm.expect(target.author.id).equal(2);\r",
+											"    pm.expect(target.author.id).equal(138);\r",
 											"});"
 										],
 										"type": "text/javascript",
