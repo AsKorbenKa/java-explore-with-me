@@ -50,11 +50,6 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
                 .orElseThrow(() -> new ConditionsNotMetException("Оставить комментарий можно только на событие, в " +
                         "котором вам было одобрено участие."));
 
-        // Если событие еще не состоялось, выбрасываем исключение
-//        if (LocalDateTime.now().isBefore(event.getEventDate())) {
-//            throw new ConditionsNotMetException("Нельзя оставить комментарий на событие, которое еще не состоялось.");
-//        }
-
         Comment savedComment = repository.save(CommentMapper.mapNewRequestToComment(request, user, event));
         return CommentMapper.mapCommentToCommentDto(savedComment);
     }

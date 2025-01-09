@@ -84,6 +84,5 @@ CREATE TABLE IF NOT EXISTS comments (
     created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     CONSTRAINT pk_comments PRIMARY KEY (id),
     CONSTRAINT fk_comment_user FOREIGN KEY (author_id) REFERENCES users(id),
-    CONSTRAINT fk_comment_event FOREIGN KEY (event_id) REFERENCES events(id),
-    CONSTRAINT UQ_AUTHOR_EVENT UNIQUE(author_id, event_id)
+    CONSTRAINT fk_comment_event FOREIGN KEY (event_id) REFERENCES events(id)
 );
