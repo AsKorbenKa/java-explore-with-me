@@ -1,0 +1,1336 @@
+{
+	"info": {
+		"_postman_id": "3f945257-9378-46fd-84c2-8f289d958367",
+		"name": "Test Explore With Me - Comments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37625994"
+	},
+	"item": [
+		{
+			"name": "Valid",
+			"item": [
+				{
+					"name": "Success",
+					"item": [
+						{
+							"name": "Добавляем инициатора события",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const source = JSON.parse(pm.request.body.raw);\r",
+											"const target = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Пользователь должен содержать поля: id, name, email\", function () {\r",
+											"pm.expect(target).to.have.property('id');\r",
+											"pm.expect(target).to.have.property('name');\r",
+											"pm.expect(target).to.have.property('email');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+											"    pm.expect(target.id).to.not.be.null;\r",
+											"    pm.expect(\"Initiator I.I.\").equal(target.name, 'Имя пользователя должно соответствовать отправленному в запросе');\r",
+											"    pm.expect(\"Initiator@yandex.ru\").equal(target.email, 'Почта пользователя должна соответствовать отправленной в запросе');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Initiator I.I.\",\r\n\t\"email\":\"Initiator@yandex.ru\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/admin/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавляем участника события",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const source = JSON.parse(pm.request.body.raw);\r",
+											"const target = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Пользователь должен содержать поля: id, name, email\", function () {\r",
+											"pm.expect(target).to.have.property('id');\r",
+											"pm.expect(target).to.have.property('name');\r",
+											"pm.expect(target).to.have.property('email');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+											"    pm.expect(target.id).to.not.be.null;\r",
+											"    pm.expect(\"Participant P.P.\").equal(target.name, 'Имя пользователя должно соответствовать отправленному в запросе');\r",
+											"    pm.expect(\"Participant@yandex.ru\").equal(target.email, 'Почта пользователя должна соответствовать отправленной в запросе');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Participant P.P.\",\r\n\t\"email\":\"Participant@yandex.ru\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/admin/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавляем категорию",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const source = JSON.parse(pm.request.body.raw);\r",
+											"const target = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Категория должна содержать поля: id, name\", function () {\r",
+											"pm.expect(target).to.have.property('id');\r",
+											"pm.expect(target).to.have.property('name');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+											"    pm.expect(target.id).to.not.be.null;\r",
+											"    pm.expect(\"Category 1\").equal(target.name, 'Название категории должно совпадать с отправленным');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Category 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/admin/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавляем новое событие",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"annotation\":\"Annotation for Event 1\",\r\n    \"category\": 122,\r\n\t\"description\":\"Description for Event 1\",\r\n\t\"eventDate\":\"2025-01-29 12:12:12\",\r\n\t\"location\": {\r\n        \"lat\": 1.00,\r\n        \"lon\": 1.00\r\n        },\r\n\t\"paid\": true,\r\n\t\"participantLimit\": 50,\r\n\t\"requestModeration\": false,\r\n\t\"title\":\"Title for Event 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/:userId/events",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"events"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "137"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Публикуем событие",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"annotation\":\"Annotation for Event 1\",\r\n    \"category\": 122,\r\n\t\"description\":\"Description for Event 1\",\r\n\t\"eventDate\":\"2025-01-29 12:12:12\",\r\n\t\"location\": {\r\n        \"lat\": 1.00,\r\n        \"lon\": 1.00\r\n        },\r\n\t\"paid\": true,\r\n\t\"participantLimit\": 50,\r\n\t\"requestModeration\": false,\r\n    \"stateAction\": \"PUBLISH_EVENT\",\r\n\t\"title\":\"Title for Event 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/admin/events/:eventId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"events",
+										":eventId"
+									],
+									"variable": [
+										{
+											"key": "eventId",
+											"value": "107"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавляем запрос на участие",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/users/:userId/requests?eventId=107",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"requests"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "107"
+										}
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавление нового комментария",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(201);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const source = JSON.parse(pm.request.body.raw);\r",
+											"const target = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Комментарий должен содержать поля: id, created, text, author, event\", function () {\r",
+											"pm.expect(target).to.have.property('id');\r",
+											"pm.expect(target).to.have.property('text');\r",
+											"pm.expect(target).to.have.property('author');\r",
+											"pm.expect(target).to.have.property('event');\r",
+											"pm.expect(target).to.have.property('created');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+											"    pm.expect(\"Отличный концерт. Я ждал его 7 лет в Азкабане. Буду советовать всем без разбору и без остановки.\").equal(target.text);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Отличный концерт. Я ждал его 7 лет в Азкабане. Буду советовать всем без разбору и без остановки.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments?eventId=107",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "107"
+										}
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получаем все комментарии пользователя",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(200);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получаем комментарий по его id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(200);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments/:commentId",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments",
+										":commentId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										},
+										{
+											"key": "commentId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Обновляем текст комментария по запросу автора",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(200);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const source = JSON.parse(pm.request.body.raw);\r",
+											"const target = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Комментарий должен содержать поля: id, created, text, author, event\", function () {\r",
+											"pm.expect(target).to.have.property('id');\r",
+											"pm.expect(target).to.have.property('text');\r",
+											"pm.expect(target).to.have.property('author');\r",
+											"pm.expect(target).to.have.property('event');\r",
+											"pm.expect(target).to.have.property('created');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+											"    pm.expect(target.id).to.not.be.null;\r",
+											"    pm.expect(source.text).equal(target.text);\r",
+											"    pm.expect(target.author.id).equal(138);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Отличный концерт. Я ждал его 7 лет в Азкабане.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments/:commentId",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments",
+										":commentId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										},
+										{
+											"key": "commentId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Обновляем данные комментария по запросу администратора",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(200);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const source = JSON.parse(pm.request.body.raw);\r",
+											"const target = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Комментарий должен содержать поля: id, created, text, author, event\", function () {\r",
+											"pm.expect(target).to.have.property('id');\r",
+											"pm.expect(target).to.have.property('text');\r",
+											"pm.expect(target).to.have.property('author');\r",
+											"pm.expect(target).to.have.property('event');\r",
+											"pm.expect(target).to.have.property('created');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+											"    pm.expect(target.status).equal(\"PUBLISHED\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Отличный концерт. Я ждал его 7 лет в Азкабане.\",\r\n    \"status\": \"PUBLISH_COMMENT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/admin/comments/:commentId",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"comments",
+										":commentId"
+									],
+									"variable": [
+										{
+											"key": "commentId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получаем комментарии по параметрам",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+											"    pm.response.to.be.ok;    \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/admin/comments?users=0&statuses=PUBLISHED&events=0&rangeStart=2022-01-06 00:00:00&rangeEnd=2097-09-06 00:00:00&from=0&size=1000",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "users",
+											"value": "0"
+										},
+										{
+											"key": "statuses",
+											"value": "PUBLISHED"
+										},
+										{
+											"key": "events",
+											"value": "0"
+										},
+										{
+											"key": "rangeStart",
+											"value": "2022-01-06 00:00:00"
+										},
+										{
+											"key": "rangeEnd",
+											"value": "2097-09-06 00:00:00"
+										},
+										{
+											"key": "from",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "1000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Удаляем комментарий",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments/:commentId",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments",
+										":commentId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										},
+										{
+											"key": "commentId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UnvalidParams",
+					"item": [
+						{
+							"name": "Добавление нового комментария с пустым текстом",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(400);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \" \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments?eventId=107",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "107"
+										}
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавление нового комментария с длиной текста < 20",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(400);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"текст\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments?eventId=107",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "107"
+										}
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавление комментария с длиной текста > 2000",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(400);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Концерт, который я только что посетил, стал настоящим праздником для души и ушей! Это было событие, которое можно назвать не просто музыкальным выступлением, а целым путешествием в мир звуков, эмоций и эстетики. Весь зал был пропитан атмосферой волнения, ожидания и какого-то особенного магического настроя, который держал всех до последней ноты. С самого начала было ясно, что артисты вложили в этот концерт не только свою профессиональную подготовку, но и душу. Они не просто исполнили песни, они создали историю, каждый аккорд которой затрагивал самые глубокие уголки сердца. Это была не просто музыка, это была реальная трансформация, в которой каждый зритель мог найти что-то личное, важное для себя. Удивительная синергия между музыкантами, их слаженность и ощущение единства, несмотря на разнообразие жанров, было по-настоящему восхитительным. Особое внимание стоит уделить выбору репертуара. Он оказался абсолютно идеальным, сочетая как старые, полюбившиеся хиты, так и новинки, которые были восприняты с таким же восторгом. Эти песни звучали настолько живо, словно они были написаны и исполнены исключительно для этого момента, для этого вечера. Не могу не отметить удивительное качество звука: каждый инструмент звучал ярко, четко и органично, создавая тот самый объем, который позволяет полностью погрузиться в происходящее. Не менее важно отметить и сценическое оформление. Художники постарались на славу, и каждый элемент дизайна, от световых эффектов до видеоартов, был не просто красивым, но и функциональным. Все эти визуальные и звуковые элементы гармонично дополняли музыку, создавая уникальную атмосферу. Артисты по-настоящему прониклись атмосферой, а взаимодействие с публикой не оставило никого равнодушным. Они были искренними, открытыми и, что немаловажно, очень внимательными к каждому зрителю. Все это превращало концерт в уникальный опыт, в котором каждый чувствовал себя частью чего-то большего, важного и настоящего. В конце вечера, когда музыканты поблагодарили публику и оставили на прощание последнее произведение, было ощущение, что это не просто завершение, а важная веха в жизни каждого, кто присутствовал. Эмоции и впечатления, которые я увез с собой, останутся надолго, и я уверен, что этот концерт станет одним из тех, о которых будут вспоминать с теплотой и благодарностью.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments?eventId=107",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "107"
+										}
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Обновляем текст комментария с длиной < 20",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(400);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Отличный концерт.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments/:commentId",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments",
+										":commentId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										},
+										{
+											"key": "commentId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Обновляем текст комментария с длиной > 2000",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(400);   \r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Концерт, который я только что посетил, стал настоящим праздником для души и ушей! Это было событие, которое можно назвать не просто музыкальным выступлением, а целым путешествием в мир звуков, эмоций и эстетики. Весь зал был пропитан атмосферой волнения, ожидания и какого-то особенного магического настроя, который держал всех до последней ноты. С самого начала было ясно, что артисты вложили в этот концерт не только свою профессиональную подготовку, но и душу. Они не просто исполнили песни, они создали историю, каждый аккорд которой затрагивал самые глубокие уголки сердца. Это была не просто музыка, это была реальная трансформация, в которой каждый зритель мог найти что-то личное, важное для себя. Удивительная синергия между музыкантами, их слаженность и ощущение единства, несмотря на разнообразие жанров, было по-настоящему восхитительным. Особое внимание стоит уделить выбору репертуара. Он оказался абсолютно идеальным, сочетая как старые, полюбившиеся хиты, так и новинки, которые были восприняты с таким же восторгом. Эти песни звучали настолько живо, словно они были написаны и исполнены исключительно для этого момента, для этого вечера. Не могу не отметить удивительное качество звука: каждый инструмент звучал ярко, четко и органично, создавая тот самый объем, который позволяет полностью погрузиться в происходящее. Не менее важно отметить и сценическое оформление. Художники постарались на славу, и каждый элемент дизайна, от световых эффектов до видеоартов, был не просто красивым, но и функциональным. Все эти визуальные и звуковые элементы гармонично дополняли музыку, создавая уникальную атмосферу. Артисты по-настоящему прониклись атмосферой, а взаимодействие с публикой не оставило никого равнодушным. Они были искренними, открытыми и, что немаловажно, очень внимательными к каждому зрителю. Все это превращало концерт в уникальный опыт, в котором каждый чувствовал себя частью чего-то большего, важного и настоящего. В конце вечера, когда музыканты поблагодарили публику и оставили на прощание последнее произведение, было ощущение, что это не просто завершение, а важная веха в жизни каждого, кто присутствовал. Эмоции и впечатления, которые я увез с собой, останутся надолго, и я уверен, что этот концерт станет одним из тех, о которых будут вспоминать с теплотой и благодарностью.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/:userId/comments/:commentId",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										":userId",
+										"comments",
+										":commentId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "138"
+										},
+										{
+											"key": "commentId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "404 NotFound",
+			"item": [
+				{
+					"name": "Добавление комментария к несуществующему событию",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(404);   \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Отличный концерт. Я ждал его 7 лет в Азкабане. Буду советовать всем без разбору и без остановки.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/:userId/comments?eventId=22222",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "eventId",
+									"value": "22222"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавление комментария от несуществующего пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(404);   \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Отличный концерт. Я ждал его 7 лет в Азкабане. Буду советовать всем без разбору и без остановки.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/:userId/comments?eventId=107",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "eventId",
+									"value": "107"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "222222"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получаем несуществующий комментарий",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(404);   \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/:userId/comments/:commentId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138"
+								},
+								{
+									"key": "commentId",
+									"value": "11111111111111"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновляем текст несуществующего комментария",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(404);   \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Отличный концерт. Я ждал его 7 лет в Азкабане.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/:userId/comments/:commentId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138"
+								},
+								{
+									"key": "commentId",
+									"value": "111111111"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновляем данные несуществующего комментария по запросу администратора",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(404);   \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Отличный концерт. Я ждал его 7 лет в Азкабане.\",\r\n    \"status\": \"PUBLISH_COMMENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/admin/comments/:commentId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "commentId",
+									"value": "111111111"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаляем несуществующий комментарий",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(404);   \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/:userId/comments/:commentId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138"
+								},
+								{
+									"key": "commentId",
+									"value": "1111111111"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "request_body",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
